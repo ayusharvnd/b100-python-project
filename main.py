@@ -31,14 +31,14 @@ def main():
                 book_id = input("Enter book ID: ")
                 title = input("Enter book title: ")
                 author = input("Enter author name: ")
-                library.add_book(book_id, title, author)
-                print("Book added successfully.")
+                result = library.add_book(book_id, title, author)
+                print(result)
 
             elif choice == "2":
                 member_id = input("Enter member ID: ")
                 name = input("Enter member name: ")
-                library.add_member(member_id, name)
-                print("Member added successfully.")
+                result = library.add_member(member_id, name)
+                print(result)
 
             elif choice == "3":
                 loan_id = input("Enter loan ID: ")
