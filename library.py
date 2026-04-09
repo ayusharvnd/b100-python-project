@@ -111,3 +111,61 @@ class Library:
         else:
             for member in self.members:
                 member.display_info()
+         
+    def save_data(self):
+        """Save books and members to a file."""
+        try:
+            with open("data.txt", "w") as file:
+                # Save books
+                file.write("BOOKS\n")
+                for book in self.books:
+                    file.write(book.to_file_string())
+
+                # Save members
+                file.write("MEMBERS\n")
+                for member in self.members:
+                    file.write(member.to_file_string())
+
+            print("Data saved successfully.")
+
+        except Exception as error:
+            print(f"Error saving data: {error}")
+
+    def load_data(self):
+        """Load books and members from a file."""
+        try:
+            with open("data.txt", "r") as file:
+                lines = file.readlines()
+
+            mode = None
+
+            for line in lines:
+                line = line.strip()
+
+                if line == "BOOKS":
+                    mode = "books"
+                    continue
+                elif line == "MEMBERS":
+                    mode = "members"
+                    continue
+
+                if not line:
+                    continue
+
+                if mode == "books":
+                    parts = line.split(",")
+                    book = Book(parts[0], parts[1], parts[2])
+                    book.is_available = parts[3] == "True"
+                    self.books.append(book)
+
+                elif mode == "members":
+                    parts = line.split(",")
+                    member = Member(parts[0], parts[1])
+                    if len(parts) > 2 and parts[2]:
+                        member.borrowed_books = parts[2].split("|")
+                    self.members.append(member)
+
+        except FileNotFoundError:
+            print("No previous data found. Starting fresh.")
+        except Exception as error:
+            print(f"Error loading data: {error}")
