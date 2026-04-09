@@ -65,7 +65,7 @@ def main():
             elif choice == "7":
                 library.save_data()
 
-             elif choice == "8":
+            elif choice == "8":
                   print("Exiting program. Goodbye!")
                   break
 
