@@ -15,16 +15,18 @@ def display_menu():
     print("4. Return Book")
     print("5. View All Books")
     print("6. View All Members")
-    print("7. Exit")
+    print("7. Save Data")
+    print("8. Exit")
 
 
 def main():
     """Run the main program."""
     library = Library()
+    library.load_data()
 
     while True:
         display_menu()
-        choice = input("Enter your choice (1-7): ")
+        choice = input("Enter your choice (1-8): ")
 
         try:
             if choice == "1":
@@ -61,8 +63,11 @@ def main():
                 library.display_members()
 
             elif choice == "7":
-                print("Exiting program. Goodbye!")
-                break
+                library.save_data()
+
+             elif choice == "8":
+                  print("Exiting program. Goodbye!")
+                  break
 
             else:
                 print("Invalid choice. Please enter a number from 1 to 7.")
